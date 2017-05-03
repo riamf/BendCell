@@ -25,27 +25,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClearCell" id="73o-l9-lPO" customClass="ClearCell" customModule="BendCell" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BendableCell" id="73o-l9-lPO" customClass="BendableCell" customModule="BendCell" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="73o-l9-lPO" id="5Yy-di-C4H">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n31-lt-WVR" customClass="SpringContentView" customModule="BendCell" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="n31-lt-WVR" firstAttribute="leading" secondItem="5Yy-di-C4H" secondAttribute="leading" id="Mbk-rr-rZg"/>
-                                                <constraint firstItem="n31-lt-WVR" firstAttribute="top" secondItem="5Yy-di-C4H" secondAttribute="top" id="Ydv-E7-zJM"/>
-                                                <constraint firstAttribute="trailing" secondItem="n31-lt-WVR" secondAttribute="trailing" id="ZxL-4N-zeB"/>
-                                                <constraint firstAttribute="bottom" secondItem="n31-lt-WVR" secondAttribute="bottom" id="uKX-mU-FJY"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="springView" destination="n31-lt-WVR" id="554-0r-nLF"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

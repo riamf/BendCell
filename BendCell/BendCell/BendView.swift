@@ -1,39 +1,36 @@
 //
-//  SpringContentView.swift
-//  TableViewScrolling
+//  BendView.swift
+//  BendCell
 //
-//  Created by Pawel Kowalczuk on 02/05/2017.
+//  Created by Pawel Kowalczuk on 03/05/2017.
 //  Copyright © 2017 Pawel Kowalczuk. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class SpringContentView: UIView {
+class BendView: UIView {
     
     fileprivate var rectFrame = CAShapeLayer()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundColor = .clear
+        addRectFrame()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+        addRectFrame()
+    }
+    
+    fileprivate func addRectFrame() {
         rectFrame.path = UIBezierPath(rect: frame).cgPath
         rectFrame.strokeColor = UIColor.random.cgColor
         rectFrame.lineWidth = 1.0
         rectFrame.fillColor = rectFrame.strokeColor
         layer.addSublayer(rectFrame)
-        
-//        let path = UIBezierPath()
-//        path.move(to: center)
-//        path.addLine(to: CGPoint(x: center.x, y: -center.y))
-//        
-//        let line = CAShapeLayer()
-//        line.path = path.cgPath
-//        line.strokeColor = rectFrame.strokeColor
-//        line.lineWidth = 5.0
-//        line.fillColor = UIColor.clear.cgColor
-//        layer.addSublayer(line)
-//        layer.masksToBounds = false
-//        clipsToBounds = false
     }
     
     func draw(with velocity: CGFloat, directionUp: Bool) {
@@ -43,9 +40,9 @@ class SpringContentView: UIView {
             return
         }
         
-        let kMAXLE_Y: CGFloat = 40.0
+        let kMAXLE_Y: CGFloat = 20.0
         let max_le_y = min(velocity, kMAXLE_Y)
-        let diff: CGFloat = 33.0
+        let diff: CGFloat = frame.size.width * 0.33
         let le_y: CGFloat = directionUp ? -max_le_y : max_le_y
         
         let path = UIBezierPath()
@@ -62,5 +59,14 @@ class SpringContentView: UIView {
         path.close()
         
         rectFrame.path = path.cgPath
+    }
+}
+
+private extension UIColor {
+    static var random: UIColor {
+        let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
+        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
     }
 }
