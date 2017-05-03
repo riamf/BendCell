@@ -12,6 +12,8 @@
 		722BBAC61EB9B5A700ED8393 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722BBAC41EB9B5A700ED8393 /* Main.storyboard */; };
 		722BBAC81EB9B5A700ED8393 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722BBAC71EB9B5A700ED8393 /* Assets.xcassets */; };
 		722BBACB1EB9B5A700ED8393 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722BBAC91EB9B5A700ED8393 /* LaunchScreen.storyboard */; };
+		722BBAD41EB9B5FD00ED8393 /* SpringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BBAD21EB9B5FD00ED8393 /* SpringCell.swift */; };
+		722BBAD51EB9B5FD00ED8393 /* SpringContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BBAD31EB9B5FD00ED8393 /* SpringContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		722BBAC71EB9B5A700ED8393 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		722BBACA1EB9B5A700ED8393 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722BBACC1EB9B5A700ED8393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		722BBAD21EB9B5FD00ED8393 /* SpringCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringCell.swift; sourceTree = "<group>"; };
+		722BBAD31EB9B5FD00ED8393 /* SpringContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 		722BBABF1EB9B5A700ED8393 /* BendCell */ = {
 			isa = PBXGroup;
 			children = (
+				722BBAD21EB9B5FD00ED8393 /* SpringCell.swift */,
+				722BBAD31EB9B5FD00ED8393 /* SpringContentView.swift */,
 				722BBAC01EB9B5A700ED8393 /* AppDelegate.swift */,
 				722BBAC21EB9B5A700ED8393 /* ViewController.swift */,
 				722BBAC41EB9B5A700ED8393 /* Main.storyboard */,
@@ -139,6 +145,8 @@
 			files = (
 				722BBAC31EB9B5A700ED8393 /* ViewController.swift in Sources */,
 				722BBAC11EB9B5A700ED8393 /* AppDelegate.swift in Sources */,
+				722BBAD41EB9B5FD00ED8393 /* SpringCell.swift in Sources */,
+				722BBAD51EB9B5FD00ED8393 /* SpringContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
