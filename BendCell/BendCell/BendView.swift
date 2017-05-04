@@ -12,22 +12,34 @@ import UIKit
 class BendView: UIView {
     
     fileprivate var rectFrame = CAShapeLayer()
+    fileprivate var originalColor: UIColor
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundColor = .clear
+        fatalError("Should not be initialized this way!")
+    }
+    
+    init(frame: CGRect, color: UIColor) {
+        originalColor = color
+        super.init(frame: frame)
+        backgroundColor = nil
         addRectFrame()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .clear
-        addRectFrame()
+    func update(_ color: UIColor) {
+        originalColor = color
+        rectFrame.fillColor = color.cgColor
+        rectFrame.strokeColor = color.cgColor
+    }
+    
+    override var frame: CGRect {
+        didSet {
+            rectFrame.path = UIBezierPath(rect: frame).cgPath
+        }
     }
     
     fileprivate func addRectFrame() {
         rectFrame.path = UIBezierPath(rect: frame).cgPath
-        rectFrame.strokeColor = UIColor.random.cgColor
+        rectFrame.strokeColor = originalColor.cgColor
         rectFrame.lineWidth = 1.0
         rectFrame.fillColor = rectFrame.strokeColor
         layer.addSublayer(rectFrame)
@@ -60,13 +72,13 @@ class BendView: UIView {
         
         rectFrame.path = path.cgPath
     }
-}
-
-private extension UIColor {
-    static var random: UIColor {
-        let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
-        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
-        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
-        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    
+    func applyResizing(with offset: CGFloat) {
+        guard offset <= 0.0 else { return }
+        
+        var computedFrame = frame
+        computedFrame.origin.y = offset
+        computedFrame.size.height += -offset
+        frame = computedFrame
     }
 }

@@ -8,39 +8,16 @@
 
 import UIKit
 
-
-class BendableTableViewController: UIViewController, UITableViewDelegate {
+class MyTableView: BendableCell {
     
-    @IBOutlet weak var table: UITableView!
-    private var lastOffset: CGFloat = 0.0
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let directionUp = scrollView.contentOffset.y > lastOffset
-        let velocity: CGFloat = abs(lastOffset - scrollView.contentOffset.y)
-        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: velocity, directionUp: directionUp)})
-        lastOffset = scrollView.contentOffset.y
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        lastOffset = scrollView.contentOffset.y
-        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        lastOffset = scrollView.contentOffset.y
-        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
-    }
-    
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        lastOffset = scrollView.contentOffset.y
-        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
-    }
 }
 
 class ViewController: BendableTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        table.register(MyTableView.self, forCellReuseIdentifier: "MyTableView")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -65,6 +42,7 @@ extension ViewController: UITableViewDataSource {
             fatalError("Table has no cell registered.")
         }
 
+        cell.contentView.backgroundColor = UIColor.random
         return cell
     }
 }
