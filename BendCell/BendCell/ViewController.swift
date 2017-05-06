@@ -8,41 +8,35 @@
 
 import UIKit
 
-class MyTableView: BendableCell {
-    
-    
-}
-
 class ViewController: BendableTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.register(MyTableView.self, forCellReuseIdentifier: "MyTableView")
+        table.register(MyTableViewCell.self, forCellReuseIdentifier: "MyTableViewCell")
         // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
 extension ViewController: UITableViewDataSource {
     
+    enum Table {
+        static let sections: Int = 1
+        static let rows: Int = 17
+    }
+    
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Table.sections
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 17
+        return Table.rows
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BendableCell") else {
+        let cellID = indexPath.row % 2 == 0 ? "XibCell" : "MyTableViewCell"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID) else {
             fatalError("Table has no cell registered.")
         }
-
-        cell.contentView.backgroundColor = UIColor.random
         return cell
     }
 }

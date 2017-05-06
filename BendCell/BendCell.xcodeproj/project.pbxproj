@@ -21,6 +21,8 @@
 		72F9C0B01EBB8EEE008D2E3F /* BendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F9C0981EB9C1A6008D2E3F /* BendView.swift */; };
 		72F9C0B11EBB8EEE008D2E3F /* BendableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F9C09A1EB9C40B008D2E3F /* BendableCell.swift */; };
 		72F9C0B21EBB8EEE008D2E3F /* BendableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F9C0AE1EBB8EC5008D2E3F /* BendableTableViewController.swift */; };
+		72F9C0BB1EBE0ABA008D2E3F /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F9C0BA1EBE0ABA008D2E3F /* MyTableViewCell.swift */; };
+		72F9C0BD1EBE0AD2008D2E3F /* XibCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F9C0BC1EBE0AD2008D2E3F /* XibCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		72F9C0A31EBB8E9D008D2E3F /* BendableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BendableCell.h; sourceTree = "<group>"; };
 		72F9C0A41EBB8E9D008D2E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72F9C0AE1EBB8EC5008D2E3F /* BendableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BendableTableViewController.swift; path = ../BendCell/BendableTableViewController.swift; sourceTree = "<group>"; };
+		72F9C0BA1EBE0ABA008D2E3F /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		72F9C0BC1EBE0AD2008D2E3F /* XibCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 		722BBABF1EB9B5A700ED8393 /* BendCell */ = {
 			isa = PBXGroup;
 			children = (
+				72F9C0BE1EBE0B18008D2E3F /* Cells */,
 				722BBAC01EB9B5A700ED8393 /* AppDelegate.swift */,
 				722BBAC21EB9B5A700ED8393 /* ViewController.swift */,
 				722BBAC41EB9B5A700ED8393 /* Main.storyboard */,
@@ -123,6 +128,15 @@
 				72F9C0A41EBB8E9D008D2E3F /* Info.plist */,
 			);
 			path = BendableCell;
+			sourceTree = "<group>";
+		};
+		72F9C0BE1EBE0B18008D2E3F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72F9C0BA1EBE0ABA008D2E3F /* MyTableViewCell.swift */,
+				72F9C0BC1EBE0AD2008D2E3F /* XibCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +261,8 @@
 				72F9C0991EB9C1A6008D2E3F /* BendView.swift in Sources */,
 				72F9C0AF1EBB8EC5008D2E3F /* BendableTableViewController.swift in Sources */,
 				72F9C09B1EB9C40B008D2E3F /* BendableCell.swift in Sources */,
+				72F9C0BB1EBE0ABA008D2E3F /* MyTableViewCell.swift in Sources */,
+				72F9C0BD1EBE0AD2008D2E3F /* XibCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

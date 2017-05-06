@@ -11,6 +11,11 @@ import UIKit
 
 class BendView: UIView {
     
+    enum Constants {
+        static let MaxY: CGFloat = 20.0
+        static let point3: CGFloat = 0.33
+    }
+    
     fileprivate var rectFrame = CAShapeLayer()
     fileprivate var originalColor: UIColor
     
@@ -18,7 +23,12 @@ class BendView: UIView {
         fatalError("Should not be initialized this way!")
     }
     
+    override init(frame: CGRect) {
+        fatalError("Should not be initialized this way!")
+    }
+    
     init(frame: CGRect, color: UIColor) {
+        
         originalColor = color
         super.init(frame: frame)
         backgroundColor = nil
@@ -26,6 +36,7 @@ class BendView: UIView {
     }
     
     func update(_ color: UIColor) {
+        
         originalColor = color
         rectFrame.fillColor = color.cgColor
         rectFrame.strokeColor = color.cgColor
@@ -38,6 +49,7 @@ class BendView: UIView {
     }
     
     fileprivate func addRectFrame() {
+        
         rectFrame.path = UIBezierPath(rect: frame).cgPath
         rectFrame.strokeColor = originalColor.cgColor
         rectFrame.lineWidth = 1.0
@@ -52,33 +64,26 @@ class BendView: UIView {
             return
         }
         
-        let kMAXLE_Y: CGFloat = 20.0
-        let max_le_y = min(velocity, kMAXLE_Y)
-        let diff: CGFloat = frame.size.width * 0.33
-        let le_y: CGFloat = directionUp ? -max_le_y : max_le_y
+        let maxY = min(velocity, Constants.MaxY)
+        let pThirdWidth: CGFloat = frame.size.width * Constants.point3
+        let maxYWithDirection: CGFloat = directionUp ? -maxY : maxY
         
         let path = UIBezierPath()
         path.move(to: .zero)
-        let ctrl1 = CGPoint(x:diff, y: le_y)
-        let ctrl2 = CGPoint(x: frame.size.width - diff, y: le_y)
-        path.addCurve(to: CGPoint(x:frame.size.width, y: 0.0), controlPoint1: ctrl1, controlPoint2: ctrl2)
+        let ctrlPoint1 = CGPoint(x: pThirdWidth, y: maxYWithDirection)
+        let ctrlPoint2 = CGPoint(x: frame.size.width - pThirdWidth, y: maxYWithDirection)
+        path.addCurve(to: CGPoint(x:frame.size.width, y: 0.0),
+                      controlPoint1: ctrlPoint1, controlPoint2: ctrlPoint2)
         path.addLine(to: CGPoint(x: frame.size.width, y: frame.size.height))
         
-        let ctrl3 = CGPoint(x: frame.size.width - diff, y: frame.size.height + le_y)
-        let ctrl4 = CGPoint(x: diff, y: frame.size.height + le_y)
-        path.addCurve(to: CGPoint(x: 0.0, y: frame.size.height), controlPoint1: ctrl3, controlPoint2: ctrl4)
+        let ctrlPoint3 = CGPoint(x: frame.size.width - pThirdWidth,
+                                 y: frame.size.height + maxYWithDirection)
+        let ctrlPoint4 = CGPoint(x: pThirdWidth, y: frame.size.height + maxYWithDirection)
+        path.addCurve(to: CGPoint(x: 0.0, y: frame.size.height),
+                      controlPoint1: ctrlPoint3, controlPoint2: ctrlPoint4)
         path.addLine(to: .zero)
         path.close()
         
         rectFrame.path = path.cgPath
-    }
-    
-    func applyResizing(with offset: CGFloat) {
-        guard offset <= 0.0 else { return }
-        
-        var computedFrame = frame
-        computedFrame.origin.y = offset
-        computedFrame.size.height += -offset
-        frame = computedFrame
     }
 }

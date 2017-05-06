@@ -8,30 +8,31 @@
 
 import UIKit
 
-
-class BendableTableViewController: UIViewController, UITableViewDelegate {
+open class BendableTableViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var table: UITableView!
     private var lastOffset: CGFloat = 0.0
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let directionUp = scrollView.contentOffset.y > lastOffset
         let velocity: CGFloat = abs(lastOffset - scrollView.contentOffset.y)
-        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: velocity, directionUp: directionUp)})
+        table.visibleCells.forEach({
+            ($0 as? BendableCellType)?.draw(with: velocity, directionUp: directionUp)
+        })
         lastOffset = scrollView.contentOffset.y
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        lastOffset = scrollView.contentOffset.y
-        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         lastOffset = scrollView.contentOffset.y
         table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
     }
     
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        lastOffset = scrollView.contentOffset.y
+        table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
+    }
+    
+    open func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         lastOffset = scrollView.contentOffset.y
         table.visibleCells.forEach({ ($0 as? BendableCellType)?.draw(with: 0.0, directionUp: true)})
     }

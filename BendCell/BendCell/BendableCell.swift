@@ -13,7 +13,6 @@ protocol BendableCellType {
     var bendView: BendView? { get }
     
     func draw(with velocity: CGFloat, directionUp: Bool)
-    func applyResizing(with offset: CGFloat)
 }
 
 extension BendableCellType where Self: UITableViewCell {
@@ -21,37 +20,35 @@ extension BendableCellType where Self: UITableViewCell {
     func draw(with velocity: CGFloat, directionUp: Bool) {
         bendView?.draw(with: velocity, directionUp: directionUp)
     }
-    
-    func applyResizing(with offset: CGFloat) {
-        bendView?.applyResizing(with: offset)
-    }
 }
 
-class BendableCell: UITableViewCell, BendableCellType {
+open class BendableCell: UITableViewCell, BendableCellType {
     
     var bendView: BendView?
     fileprivate var originalColor: UIColor!
     
     fileprivate func initialize() {
+        
         originalColor = contentView.backgroundColor ?? .random
         backgroundColor =  nil
         contentView.backgroundColor = nil
         addBendView()
-        addObserver(self, forKeyPath: #keyPath(contentView.backgroundColor), options: .new, context: nil)
+        addObservers()
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let color = change?[NSKeyValueChangeKey.newKey] as? UIColor {
-            bendView?.update(color)
-            contentView.backgroundColor = nil
-        }
+    fileprivate func updateIfNeeded(with color: UIColor) {
+        bendView?.update(color)
+        contentView.backgroundColor = nil
     }
     
-    deinit {
-        removeObserver(self, forKeyPath: #keyPath(contentView.backgroundColor), context: nil)
+    fileprivate func replaceBendViewIfNeeded() {
+        guard let bendViewIndex = contentView.subviews.index(where: { $0 === bendView }),
+            bendViewIndex != 0 else { return }
+        bendView?.removeFromSuperview()
+        contentView.insertSubview(bendView!, at: 0)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
@@ -61,7 +58,7 @@ class BendableCell: UITableViewCell, BendableCellType {
         initialize()
     }
     
-    override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         bendView?.frame = CGRect(origin: .zero, size: frame.size)
     }
@@ -72,13 +69,39 @@ class BendableCell: UITableViewCell, BendableCellType {
         contentView.addSubview(view)
         bendView = view
     }
+    
+    //MARK: KVO
+    
+    enum Observerable {
+        static let color: String = #keyPath(contentView.backgroundColor)
+        static let subviews: String = #keyPath(contentView.subviews)
+    }
+    
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let color = change?[NSKeyValueChangeKey.newKey] as? UIColor {
+            updateIfNeeded(with: color)
+        }
+        if keyPath == #keyPath(contentView.subviews) {
+            replaceBendViewIfNeeded()
+        }
+    }
+    
+    fileprivate func addObservers() {
+        addObserver(self, forKeyPath: Observerable.color, options: .new, context: nil)
+        addObserver(self, forKeyPath: Observerable.subviews, options: .initial, context: nil)
+    }
+    
+    deinit {
+        removeObserver(self, forKeyPath: Observerable.color, context: nil)
+        removeObserver(self, forKeyPath: Observerable.subviews, context: nil)
+    }
 }
 
 extension UIColor {
     static var random: UIColor {
-        let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
-        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
-        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
+        let hue : CGFloat = CGFloat(arc4random() % 256) / 256
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5
+        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
     }
 }

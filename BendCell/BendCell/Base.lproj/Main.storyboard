@@ -25,13 +25,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BendableCell" id="73o-l9-lPO" customClass="BendableCell" customModule="BendCell" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XibCell" id="73o-l9-lPO" customClass="XibCell" customModule="BendCell" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="73o-l9-lPO" id="5Yy-di-C4H">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swift_icon" translatesAutoresizingMaskIntoConstraints="NO" id="GVc-E8-KjF">
+                                                    <rect key="frame" x="165" y="22" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Ttm-nF-Ca9"/>
+                                                        <constraint firstAttribute="width" constant="44" id="jyv-rN-XIg"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GVc-E8-KjF" firstAttribute="centerX" secondItem="5Yy-di-C4H" secondAttribute="centerX" id="0gH-oQ-wR9"/>
+                                                <constraint firstItem="GVc-E8-KjF" firstAttribute="centerY" secondItem="5Yy-di-C4H" secondAttribute="centerY" id="fuz-cX-LBd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="someImage" destination="GVc-E8-KjF" id="oB9-WL-w21"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -57,4 +73,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="swift_icon" width="512" height="512"/>
+    </resources>
 </document>
