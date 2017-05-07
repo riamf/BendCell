@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BendCell" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AcZ-sc-Nc1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XibCell" id="73o-l9-lPO" customClass="XibCell" customModule="BendCell" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="88"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="73o-l9-lPO" id="5Yy-di-C4H">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swift_icon" translatesAutoresizingMaskIntoConstraints="NO" id="GVc-E8-KjF">
+                                                    <rect key="frame" x="165" y="22" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Ttm-nF-Ca9"/>
+                                                        <constraint firstAttribute="width" constant="44" id="jyv-rN-XIg"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GVc-E8-KjF" firstAttribute="centerX" secondItem="5Yy-di-C4H" secondAttribute="centerX" id="0gH-oQ-wR9"/>
+                                                <constraint firstItem="GVc-E8-KjF" firstAttribute="centerY" secondItem="5Yy-di-C4H" secondAttribute="centerY" id="fuz-cX-LBd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="someImage" destination="GVc-E8-KjF" id="oB9-WL-w21"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="gFW-YZ-WWx"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="oty-dn-sKi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="AcZ-sc-Nc1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="28V-H1-xgd"/>
+                            <constraint firstAttribute="trailing" secondItem="AcZ-sc-Nc1" secondAttribute="trailing" id="F1R-7g-9KT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AcZ-sc-Nc1" secondAttribute="bottom" id="c85-FK-Lgj"/>
+                            <constraint firstItem="AcZ-sc-Nc1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ihH-S0-lrx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="table" destination="AcZ-sc-Nc1" id="aPv-rg-HmT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="swift_icon" width="512" height="512"/>
+    </resources>
+</document>
